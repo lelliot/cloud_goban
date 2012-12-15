@@ -1,0 +1,197 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"A8MaSvTTSqNACJbf5gKPwiJd6rc/29VdYb2QoZlXGC68ivDs8SvINgk\"",
+ "discoveryVersion": "v1",
+ "id": "cloudgoban:v1",
+ "name": "cloudgoban",
+ "version": "v1",
+ "description": "",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://cloud-goban.appspot.com/_ah/api/",
+ "rpcUrl": "https://cloud-goban.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "schemas": {
+  "Game": {
+   "id": "Game",
+   "type": "object",
+   "properties": {
+    "created": {
+     "type": "string",
+     "format": "date"
+    },
+    "editKey": {
+     "type": "string"
+    },
+    "editkey": {
+     "type": "string"
+    },
+    "encodedKey": {
+     "type": "string"
+    },
+    "sgf": {
+     "$ref": "Text"
+    }
+   }
+  },
+  "GoGameParticipation": {
+   "id": "GoGameParticipation",
+   "type": "object",
+   "properties": {
+    "contact": {
+     "type": "string"
+    },
+    "encodedKey": {
+     "type": "string"
+    },
+    "gameKey": {
+     "type": "string"
+    },
+    "role": {
+     "type": "string"
+    }
+   }
+  },
+  "Text": {
+   "id": "Text",
+   "type": "object",
+   "properties": {
+    "value": {
+     "type": "string"
+    }
+   }
+  },
+  "Void": {
+   "id": "Void",
+   "type": "object"
+  }
+ },
+ "methods": {
+  "cloudgoban.games.edit": {
+   "id": "cloudgoban.games.edit",
+   "parameters": {
+    "resource": {
+     "$ref": "Game"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Game"
+   }
+  },
+  "cloudgoban.games.get": {
+   "id": "cloudgoban.games.get",
+   "allowGet": true,
+   "parameters": {
+    "game_key": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "game_key"
+   ],
+   "returns": {
+    "$ref": "Game"
+   }
+  },
+  "cloudgoban.games.insert": {
+   "id": "cloudgoban.games.insert",
+   "parameters": {
+    "resource": {
+     "$ref": "Game"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Game"
+   }
+  },
+  "cloudgoban.participation.delete": {
+   "id": "cloudgoban.participation.delete",
+   "parameters": {
+    "contact": {
+     "type": "string",
+     "required": true
+    },
+    "game_key": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "contact",
+    "game_key"
+   ],
+   "returns": {
+    "$ref": "Void"
+   }
+  },
+  "cloudgoban.participation.insert": {
+   "id": "cloudgoban.participation.insert",
+   "parameters": {
+    "resource": {
+     "$ref": "GoGameParticipation"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "GoGameParticipation"
+   }
+  }
+ }
+}

@@ -1,0 +1,206 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://cloud-goban.appspot.com/_ah/api",
+  "name" : "cloudgoban",
+  "version" : "v1",
+  "description" : "",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "http://cloud-goban.appspot.com/_ah/spi",
+    "deadline" : 10.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "cloudgoban.participation.delete" : {
+      "path" : "delete/{contact}/{game_key}",
+      "httpMethod" : "DELETE",
+      "rosyMethod" : "GoGameParticipationEndpoint.delete",
+      "request" : {
+        "parameters" : {
+          "contact" : {
+            "required" : true,
+            "type" : "string"
+          },
+          "game_key" : {
+            "required" : true,
+            "type" : "string"
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "cloudgoban.participation.insert" : {
+      "path" : "gogameparticipation",
+      "httpMethod" : "POST",
+      "rosyMethod" : "GoGameParticipationEndpoint.insert",
+      "request" : {
+        "parameters" : {
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "cloudgoban.games.get" : {
+      "path" : "game/{game_key}",
+      "httpMethod" : "GET",
+      "rosyMethod" : "GamesEndpoint.get",
+      "request" : {
+        "parameters" : {
+          "game_key" : {
+            "required" : true,
+            "type" : "string"
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "cloudgoban.games.insert" : {
+      "path" : "game",
+      "httpMethod" : "POST",
+      "rosyMethod" : "GamesEndpoint.insert",
+      "request" : {
+        "parameters" : {
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "cloudgoban.games.edit" : {
+      "path" : "edit",
+      "httpMethod" : "POST",
+      "rosyMethod" : "GamesEndpoint.edit",
+      "request" : {
+        "parameters" : {
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Void" : {
+        "id" : "Void",
+        "type" : "object",
+        "properties" : {
+        }
+      },
+      "GoGameParticipation" : {
+        "id" : "GoGameParticipation",
+        "type" : "object",
+        "properties" : {
+          "contact" : {
+            "type" : "string"
+          },
+          "encodedKey" : {
+            "type" : "string"
+          },
+          "gameKey" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Game" : {
+        "id" : "Game",
+        "type" : "object",
+        "properties" : {
+          "created" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "editKey" : {
+            "type" : "string"
+          },
+          "editkey" : {
+            "type" : "string"
+          },
+          "encodedKey" : {
+            "type" : "string"
+          },
+          "sgf" : {
+            "$ref" : "Text"
+          }
+        }
+      },
+      "Text" : {
+        "id" : "Text",
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "GoGameParticipationEndpoint.delete" : {
+        "response" : {
+          "$ref" : "Void"
+        }
+      },
+      "GoGameParticipationEndpoint.insert" : {
+        "request" : {
+          "$ref" : "GoGameParticipation"
+        },
+        "response" : {
+          "$ref" : "GoGameParticipation"
+        }
+      },
+      "GamesEndpoint.get" : {
+        "response" : {
+          "$ref" : "Game"
+        }
+      },
+      "GamesEndpoint.insert" : {
+        "request" : {
+          "$ref" : "Game"
+        },
+        "response" : {
+          "$ref" : "Game"
+        }
+      },
+      "GamesEndpoint.edit" : {
+        "request" : {
+          "$ref" : "Game"
+        },
+        "response" : {
+          "$ref" : "Game"
+        }
+      }
+    }
+  }
+}
